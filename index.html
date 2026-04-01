@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Princess Pihu 👑</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #ffdde1, #ffc3a0);
+            background-size: 400% 400%;
+            animation: gradientBG 10s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.2);
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            width: 90%;
+            max-width: 350px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: white;
+            font-size: 26px;
+        }
+
+        #text {
+            color: white;
+            margin: 15px 0;
+            min-height: 60px;
+            font-size: 18px;
+        }
+
+        button {
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 30px;
+            border: none;
+            margin: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #yes {
+            background: #ff4d6d;
+            color: white;
+            box-shadow: 0 0 10px #ff4d6d;
+        }
+
+        #yes:hover {
+            transform: scale(1.1);
+        }
+
+        #no {
+            background: white;
+            color: #ff4d6d;
+            position: absolute;
+        }
+
+        .music-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: white;
+            border-radius: 50%;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .heart {
+            position: absolute;
+            color: rgba(255, 0, 100, 0.7);
+            animation: float 6s linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-800px);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="music-btn" onclick="playMusic()">🎵</div>
+
+    <div class="container">
+        <h1>For My Princess Pihu 👑</h1>
+        <div id="text"></div>
+
+        <button id="yes">Yes Sweetie 💖</button>
+        <button id="no">No 😜</button>
+    </div>
+
+    <audio id="music" loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3">
+    </audio>
+
+    <script>
+        const message = "Hey Princess... 💕 From the moment we started talking today... something felt different... ✨ You made me smile without even trying... 🥺 So tell me... will you be my girl? 💖";
+        let i = 0;
+
+        function typeWriter() {
+            if (i < message.length) {
+                document.getElementById("text").innerHTML += message.charAt(i);
+                i++;
+                setTimeout(typeWriter, 35);
+            }
+        }
+
+        typeWriter();
+
+        // No button escape
+        const noBtn = document.getElementById("no");
+
+        function moveButton() {
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 50);
+            noBtn.style.left = x + "px";
+            noBtn.style.top = y + "px";
+        }
+
+        noBtn.addEventListener("touchstart", moveButton);
+        noBtn.addEventListener("mouseover", moveButton);
+
+        // Yes click
+        document.getElementById("yes").onclick = () => {
+            document.body.innerHTML = `
+    <div style="color:white;text-align:center;margin-top:40%">
+    <h1>Yayyy 💖</h1>
+    <h2>I Love You Princess 👑</h2>
+    <p>Now you're officially mine 😏</p>
+    </div>`;
+        };
+
+        // Music
+        function playMusic() {
+            document.getElementById("music").play();
+        }
+
+        // Hearts
+        setInterval(() => {
+            const heart = document.createElement("div");
+            heart.innerHTML = "💖";
+            heart.classList.add("heart");
+            heart.style.left = Math.random() * window.innerWidth + "px";
+            heart.style.fontSize = Math.random() * 20 + 20 + "px";
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 6000);
+        }, 300);
+    </script>
+
+</body>
+
+</html>
